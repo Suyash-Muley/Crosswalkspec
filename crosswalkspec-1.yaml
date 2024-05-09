@@ -1,0 +1,168 @@
+openapi: 3.1.0
+info:
+  title: csi-crosswalk
+  description: >-
+    The APIs allows the public users to search for classifications of product numbers
+    in Construction Industry for formats like MasterFormat, MasterFormat 1995, UniFormat, OmniClass.
+    With the help of GET call it returns the JSON response having classifications for the same number.
+    This API also allows to crosswalk between different formats using GET calls to find the corresponding results across
+    different standards. The parameters passed here are Number and ID where the number is the actual number of the product and
+    ID is the format/standard name.
+  version: v3
+servers:
+  - url: https://crosswalk.azure-api.net/v3
+paths:
+  '/api/standards':
+    get:
+      summary: Standards
+      description: Gets the latest version of all the standards. This API is only used to get information on standards.
+      operationId: get-standards
+      responses:
+        '200':
+          description: 'null'
+  '/api/standards/{id}':
+    get:
+      summary: Standard
+      description: Get a specific standard by name or ID. This GET API call returns information on the specified standard.
+      operationId: get-standard
+      parameters:
+        - name: id
+          in: path
+          description: The name of the standard or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+  '/api/standards/{id}/classificationswithrelations/{number}':
+    get:
+      summary: Classification with Relations by Standard
+      description:
+        Gets a specific classification for a standard. This will not work
+        for standards with tables. Includes relation arrays such as Crosswalks, See,
+        and SeeAlso. This API call is only used to find crosswalks when the number is MasterFormat, UniFormat, MasterFormat 1995.
+      operationId: get-classificationwithrelationsbystandard
+      parameters:
+        - name: id
+          in: path
+          description: The name of the standard or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: number
+          in: path
+          description: The classification number or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+  '/api/standards/{id}/table/{table}/classificationswithrelations/{number}':
+    get:
+      summary: Classification with Relations by Table
+      description:
+        Gets a specific classification for a table. This will not work
+        for standards without tables. Includes relation arrays such as Crosswalks,
+        See, and SeeAlso. This API call is only used to find crosswalks when the number is OmniClass.
+      operationId: get-classificationwithrelationsbytable
+      parameters:
+        - name: id
+          in: path
+          description: The name of the standard or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table number or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: number
+          in: path
+          description: The classification number or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+  '/api/classifications/search/{search}':
+    get:
+      summary: Search Classifications
+      description:
+        Searches for classifications containing text in all standards and
+        tables.
+      operationId: get-searchclassifications
+      parameters:
+        - name: search
+          in: path
+          description: The text with which to search.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+  '/api/standards/{id}/classifications/search/{search}':
+    get:
+      summary: Search Classifications by Standard
+      description:
+        Searches for classifications containing text for a standard. This
+        will not work for standards with tables.
+      operationId: get-searchclassificationsbystandard
+      parameters:
+        - name: id
+          in: path
+          description: The name of the standard or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: search
+          in: path
+          description: The text with which to search.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+  '/api/standards/{id}/table/{table}/classifications/search/{search}':
+    get:
+      summary: Search Classifications by Table
+      description:
+        Searches for classifications containing text for a table. This
+        will not work for standards without tables.
+      operationId: get-searchclassificationsbytable
+      parameters:
+        - name: id
+          in: path
+          description: The name of the standard or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: table
+          in: path
+          description: The table number or its ID (Guid) string representation.
+          required: true
+          schema:
+            type: string
+        - name: search
+          in: path
+          description: The text with which to search.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
+components:
+  securitySchemes:
+    apiKeyHeader:
+      type: apiKey
+      name: Authorization
+      in: header
+security:
+  - apiKeyHeader: []
