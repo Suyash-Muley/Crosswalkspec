@@ -40,14 +40,14 @@ paths:
       responses:
         '200':
           description: 'null'
-  '/api/standards/{id}/classificationswithrelations/{number}':
+  '/api/standards/{id}/classificationswithrelationsfiltered/{number}':
     get:
       summary: Classification with Relations by Standard
       description:
         Gets a specific classification for a standard.  This will not work
         for standards with tables.  Includes relation arrays such as Crosswalks, See,
         and SeeAlso. This API call is only used to find crosswalks when number is MasterFormat, UniFormat, MasterFormat 1995
-      operationId: get-classificationwithrelationsbystandard
+      operationId: get-classificationwithrelationsbystandardfiltered
       parameters:
         - name: id
           in: path
@@ -69,14 +69,14 @@ paths:
       responses:
         '200':
           description: 'null'
-  '/api/standards/{id}/table/{table}/classificationswithrelations/{number}':
+  '/api/standards/{id}/table/{table}/classificationswithrelationsfiltered/{number}':
     get:
       summary: Classification with Relations by Table
       description:
         Gets a specific classification for a table.  This will not work
         for standards without tables.  Includes relation arrays such as Crosswalks,
         See, and SeeAlso. This API call is only used to find crosswalks when number is OmniClass
-      operationId: get-classificationwithrelationsbytable
+      operationId: get-classificationwithrelationsbytablefiltered
       parameters:
         - name: id
           in: path
