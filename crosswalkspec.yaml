@@ -121,6 +121,23 @@ paths:
       responses:
         '200':
           description: 'null'
+  '/api/classifications/searchFiltered/{search}':
+    get:
+      summary: Search Classifications
+      description:
+        Searches for classifications containing text in all standards and
+        tables.
+      operationId: get-searchclassificationsfiltered
+      parameters:
+        - name: search
+          in: path
+          description: The text with which to search.
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: 'null'
   '/api/standards/{id}/classifications/search/{search}':
     get:
       summary: Search Classifications by Standard
