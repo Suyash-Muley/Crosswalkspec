@@ -121,68 +121,6 @@ paths:
       responses:
         '200':
           description: 'null'
-  '/api/standards/{id}/classifications/search/{search}':
-    get:
-      summary: Search Classifications by Standard
-      description:
-        Searches for classifications containing text for a standard.  This
-        will not work for standards with tables.
-      operationId: get-searchclassificationsbystandard
-      parameters:
-        - name: id
-          in: path
-          description: The name of the standard or it's ID (Guid) string representation.
-          required: true
-          schema:
-            enum:
-              - ''
-              - ''
-              - ''
-              - ''
-            type: string
-        - name: search
-          in: path
-          description: The text with which to search.
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'null'
-  '/api/standards/{id}/table/{table}/classifications/search/{search}':
-    get:
-      summary: Search Classifications by Table
-      description:
-        Searches for classifications containing text for a table.  This
-        will not work for standards without tables.
-      operationId: get-searchclassificationsbytable
-      parameters:
-        - name: id
-          in: path
-          description: The name of the standard or it's ID (Guid) string representation.
-          required: true
-          schema:
-            enum:
-              - ''
-              - ''
-              - ''
-              - ''
-            type: string
-        - name: table
-          in: path
-          description: The table number or it's ID (Guid) string representation.
-          required: true
-          schema:
-            type: string
-        - name: search
-          in: path
-          description: The text with which to search.
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: 'null'
 components:
   securitySchemes:
     apiKeyHeader:
